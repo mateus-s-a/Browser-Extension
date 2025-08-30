@@ -1,0 +1,29 @@
+{
+    "manifest_version": 3,
+    "name": "My First Extension",
+    "version": "1.0.0",
+    "description": "A simple example extension.",
+
+    "icons": {
+        "48": "icons/icon-48.png"
+    },
+
+    "action": {
+        "default_icon": "icons/icon-48.png",
+        "default_title": "Click Me!",
+        "default_popup": "popup/popup.html"
+    },
+
+    "host_permissions": [
+        "*://developer.mozilla.org/*"
+    ],
+
+    "content_scripts": [
+        {
+            "matches": [
+                "*://developer.mozilla.org/*"
+            ],
+            "js": ["scripts/content.js"]
+        }
+    ]
+}
