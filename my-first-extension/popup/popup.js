@@ -1,9 +1,14 @@
 const title = document.getElementById('title');             // Gets the 'title' h1 reference
 
-title.addEventListener('click', () => {                     // Add a 'click' in 'title' h1 reference
-    console.log("Title clicked. Sending message.");
+async function handleClick() {
+    let tabs = await browser.tabs.query({ active: true, currentWindow: true });
 
-    browser.runtime.sendMessage({                           // Send a msg to other parts of the extension
-        action: "changeColor"
-    });
-});
+    if (tabs.length > 0) {
+        let activeTab = tabs[0];
+        browser.tabs.sendMessage(activeTab.id, {
+            action: "changeColor"
+        });
+    }
+}
+
+title.addEventListener('click', handleClick);
