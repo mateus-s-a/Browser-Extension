@@ -16,10 +16,7 @@
     ],
 
     "background": {
-        "scripts": [
-            "libs/browser-polyfill.min.js",
-            "background.js"
-        ]
+        "service_worker": "background.js"
     },
 
     "action": {
