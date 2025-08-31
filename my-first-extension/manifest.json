@@ -16,7 +16,7 @@
     ],
 
     "background": {
-        "scripts": ["background.js"]
+        "service_worker": "background.js"
     },
 
     "action": {
@@ -28,7 +28,10 @@
     "content_scripts": [
         {
             "matches": ["*://developer.mozilla.org/*"],
-            "js": ["scripts/content.js"]
+            "js": [
+                "libs/browser-polyfill.min.js",
+                "scripts/content.js"
+            ]
         }
     ]
 }
