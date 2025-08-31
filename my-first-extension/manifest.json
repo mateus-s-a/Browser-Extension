@@ -25,5 +25,9 @@
             ],
             "js": ["scripts/content.js"]
         }
-    ]
+    ],
+
+    "background": {
+        "scripts": ["background.js"]
+    }
 }
