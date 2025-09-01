@@ -40,7 +40,7 @@ async function handleDownload() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-RapidAPI-Key': '06873e9a9dmsh5690bf7dfbb2161p1dd49ejsn9c64de50c7a6',
+            'X-RapidAPI-Key': 'MY_API',
             'X-RapidAPI-Host': 'tube-mp31.p.rapidapi.com'
         },
         body: JSON.stringify({ videoId: videoId })
