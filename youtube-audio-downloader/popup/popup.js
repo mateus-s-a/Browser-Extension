@@ -40,7 +40,7 @@ async function handleDownload() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-RapidAPI-Key': '06873e9a9dmsh5690bf7dfbb2161p1dd49ejsn9c64de50c7a6',
+            'X-RapidAPI-Key': API_KEY,
             'X-RapidAPI-Host': 'tube-mp31.p.rapidapi.com'
         },
         body: JSON.stringify({ videoId: videoId })
@@ -50,8 +50,8 @@ async function handleDownload() {
         const response = await fetch('https://tube-mp31.p.rapidapi.com/api/json', fetchOptions);
         const result = await response.json();
 
-        if (result.status === 'success' && result.result && result.result[0].dlurl) {
-            const downloadUrl = result.result[0].dlurl;
+        if (result.status === 'success' && result.result && result.result.dlurl) {
+            const downloadUrl = result.result.dlurl;
             console.log(`Success. Download link received: ${downloadUrl}`);
 
             /*const sanitizedTitle = videoTitleElement.innerText.replace(/[/\\?%*:|"<>]/g, '_');
