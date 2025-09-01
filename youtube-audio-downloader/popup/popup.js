@@ -14,8 +14,10 @@ async function setupPopup() {
         files: ['/scripts/content-script.js']
     });
 
-    const { title } = results[0].result;
+    const { title, length } = results[0].result;
+    
     videoTitleElement.innerText = title;
+    videoLengthElement.innerText = length;
 }
 
 document.addEventListener('DOMContentLoaded', setupPopup);
