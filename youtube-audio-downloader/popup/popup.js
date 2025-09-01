@@ -25,27 +25,53 @@ async function handleDownload() {
 
     let [tab] = await browser.tabs.query({ active: true, currentWindow: true });        // 1. Get the active tab to find its URL
     if (!tab || !tab.url) {
-        console.error("Could not get actiba tab URL");
+        console.error("Could not get active tab URL");
         return;
     }
 
-    const serviceUrl = "https://www.yt2mp3s.com/api/button/mp3/";
-    const videoId = new URL(tab.url).searchParams.get('v');
-    const downloadUrl = `${serviceUrl}${videoId}`;
+    const videoUrl = new URL(tab.url);                                                  // 2. Get the video ID from the tab's URL
+    const videoId = videoUrl.searchParams.get('v');
+    if (!videoId) {
+        console.error("Could not extract video ID from URL");
+        return;
+    }
 
-    console.log(`Attempting to download from: ${downloadUrl}`);
+    const fetchOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': '06873e9a9dmsh5690bf7dfbb2161p1dd49ejsn9c64de50c7a6',
+            'X-RapidAPI-Host': 'tube-mp31.p.rapidapi.com'
+        },
+        body: JSON.stringify({ videoId: videoId })
+    };
 
-    const sanitizedTitle = videoTitleElement.innerText.replace(/[/\\?%*:|"<>]/g, '_');
-    
-    browser.downloads.download({
-        url: downloadUrl,
-        filename: `${sanitizedTitle}.mp3`
-    }).then(
-        () => console.log("Download started"),
-        (error) => console.error(`Download failed: ${error}`)
-    );
+    try {
+        console.log(fetchOptions);
+        
+        const response = await fetch('https://tube-mp31.p.rapidapi.com/api/json', fetchOptions);
+        console.log(response);
+
+        const result = await response.json();
+        console.log(result);
+
+        if (result.status === 'success' && result.result && result.result[0].dlurl) {
+            const downloadUrl = result.result[0].dlurl;
+            console.log(`Success. Download link received: ${downloadUrl}`);
+
+            const sanitizedTitle = videoTitleElement.innerText.replace(/[/\\?%*:|"<>]/g, '_');
+            browser.downloads.download({
+                url: downloadUrl,
+                filename: `${sanitizedTitle}.mp3`
+            });
+        } else {
+            console.error("API did not return a success status or download link", result);
+        }
+    } catch (error) {
+        console.error("Failed to fetch from API:", error);
+    }
 }
 
 
 document.addEventListener('DOMContentLoaded', setupPopup);
-document.addEventListener('click', handleDownload);
+downloadBtn.addEventListener('click', handleDownload);
