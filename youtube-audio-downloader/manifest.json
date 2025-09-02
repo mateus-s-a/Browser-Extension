@@ -23,5 +23,11 @@
             "resources": ["scripts/content-script.js"],
             "matches": ["*://*.youtube.com/*"]
         }
-    ]
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "youtube-audio-downloader@mspacery4"
+        }
+    }
 }

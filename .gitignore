@@ -1,3 +1,5 @@
 .env
 .dist/
 config.js
+*.zip
+*.txt
