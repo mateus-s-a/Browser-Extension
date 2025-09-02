@@ -7,3 +7,10 @@
 [WebExtension `browser` API Polyfill](https://github.com/mozilla/webextension-polyfill)
 
 [Updating your extension](https://extensionworkshop.com/documentation/manage/updating-your-extension/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=submission)
+
+
+---
+
+
+### Future use - see more about eventually:
+[youtube-download-api](https://github.com/MatheusIshiyama/youtube-download-api/tree/main)
